@@ -1,5 +1,7 @@
 extends Area2D
 
+class_name LightSource
+
 var target = null
 var hit_pos = []
 var flipped = false

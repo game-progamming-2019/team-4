@@ -1,0 +1,11 @@
+{
+  "guard":[
+    {
+      "Id": 0,
+      "tex_src": "../Sprites/Guard.png",
+      "moveSpeed": 200,
+      "moveRange": 150,
+      "waitDuration": 5
+    }
+  ]
+}
