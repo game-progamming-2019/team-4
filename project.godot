@@ -27,7 +27,7 @@ _global_script_class_icons={
 [application]
 
 config/name="TheEscape"
-run/main_scene="res://Scenen/Guard.tscn"
+run/main_scene="res://Scenes/Guard.tscn"
 config/icon="res://icon.png"
 
 [rendering]
