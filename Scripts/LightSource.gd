@@ -34,6 +34,7 @@ func _physics_process(delta):
 		var ne = target.position + Vector2(target_extents.x, -target_extents.y)
 		var sw = target.position + Vector2(-target_extents.x, target_extents.y)
 		for pos in [target.position, nw, ne, se, sw]:
+			pos.x *= get_parent().scale.x
 			var result = space_state.intersect_ray(position, pos, [self], collision_mask)
 			if result:
 				hit_pos.append(result.position)

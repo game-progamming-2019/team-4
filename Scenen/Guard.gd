@@ -14,26 +14,41 @@ var velocity = Vector2(1, 0)
 # var a = 2
 # var b = "text"
 var json
+var timer
+var stop = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var file = File.new()
 	file.open("./Assets/JsonConfigs/staff.json", file.READ)
 	json = parse_json(file.get_as_text())
 	file.close()
+	timer = Timer.new()
+	timer.wait_time = json["guard"][id]["waitDuration"]
+	timer.connect("timeout", self, "_on_timeout")
+	add_child(timer)
 	createGuard()
 
 func createGuard():
 	var sprite : Sprite = $CollisionShape2D/Sprite
 	var jsonString = json["guard"][id]
 	print(jsonString)
-	sprite.texture = load("res://Assets/" + jsonString["tex_src"])
-	sprite.hframes = jsonString["hframes"]
+	#sprite.texture = load("res://Assets/" + jsonString["tex_src"])
+	#sprite.hframes = jsonString["hframes"]
 	moveDist = jsonString["moveRange"]
 	moveSpeed = jsonString["moveSpeed"]
-	var timer = Timer.new()
-	timer.wait_time = jsonString["waitDuration"]
-	add_child(timer)
 
 func _physics_process(delta):
-	pass
+	if current_dist < moveDist:
+		current_dist += moveSpeed * delta
+	elif current_dist >= moveDist and not stop:
+		timer.start()
+		stop = true	
 	
+	if not stop:
+		move_and_slide(velocity * moveSpeed, Vector2.UP)
+	
+func _on_timeout():
+	velocity.x *= -1
+	current_dist = 0
+	scale.x *= -1
+	stop = false
