@@ -4,7 +4,7 @@
 [ext_resource path="res://Scripts/LightSource.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Sprites/flashlight.png" type="Texture" id=3]
 
-[sub_resource type="GDScript" id=3]
+[sub_resource type="GDScript" id=1]
 script/source = "extends KinematicBody2D
 
 enum TYPE{GUARD}
@@ -64,10 +64,10 @@ func _on_timeout():
 	$AnimationPlayer.play(\"walk\")
 	stop = false"
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 32, 32 )
 
-[sub_resource type="CircleShape2D" id=2]
+[sub_resource type="CircleShape2D" id=3]
 radius = 61.5224
 
 [sub_resource type="Animation" id=4]
@@ -87,13 +87,13 @@ tracks/0/keys = {
 
 [node name="Guard" type="KinematicBody2D"]
 position = Vector2( 253.098, 338.242 )
-script = SubResource( 3 )
+script = SubResource( 1 )
 __meta__ = {
 "_edit_group_": true
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -108,7 +108,7 @@ script = ExtResource( 2 )
 polygon = PoolVector2Array( -33, -1.19846, 455, 136, 479, 45, 477, -41, 457.526, -134.883 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LightSource"]
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="Light2D" type="Light2D" parent="LightSource"]
 position = Vector2( 260, 0 )
