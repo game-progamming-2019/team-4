@@ -16,21 +16,38 @@ var can_walk = true
 #		add idle animation
 
 func get_Input():
-	velocity.x = 0	
-
+	velocity.x = 0
+	
 	if Input.is_key_pressed(KEY_A):	
 		if Input.is_key_pressed(KEY_SHIFT):
 			velocity.x -= walkspeed * runMultiplier
+			
+			$icon.flip_h = true
+			$icon/AnimationPlayer.playback_speed = 4
+			$icon/AnimationPlayer.play("walk")
 		else:
 			velocity.x -= walkspeed
+			
+			$icon.flip_h = true
+			$icon/AnimationPlayer.playback_speed = 2
+			$icon/AnimationPlayer.play("walk")
 		
-	if Input.is_key_pressed(KEY_D):
+	elif Input.is_key_pressed(KEY_D):
 		if Input.is_key_pressed(KEY_SHIFT):
 			velocity.x += walkspeed * runMultiplier
+			
+			$icon.flip_h = false
+			$icon/AnimationPlayer.playback_speed = 4
+			$icon/AnimationPlayer.play("walk")
 		else:
 			velocity.x += walkspeed
-
 			
+			$icon.flip_h = false
+			$icon/AnimationPlayer.playback_speed = 2
+			$icon/AnimationPlayer.play("walk")
+		
+	else:
+		$icon/AnimationPlayer.play("idle")
 		
 	if Input.is_key_pressed(KEY_SPACE) and not jumping and is_on_floor():
 		velocity.y = jumpspeed
