@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 export var walkspeed = 200
 export var gravity = 750
-export var jumpspeed = -300
+export var jumpspeed = -350
 export var runMultiplier = 1.5
 
 var velocity = Vector2()
@@ -14,7 +14,6 @@ var can_walk = true
 var crouching = false
 
 #TODO: 	add stammina for running 
-#		add idle animation
 
 func get_Input():
 	velocity.x = 0

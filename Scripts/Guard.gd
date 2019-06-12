@@ -14,6 +14,8 @@ var stop = false
 var json
 var timer
 
+var ready = false
+
 func _ready():
 	var file = File.new()
 	file.open("./Assets/JsonConfigs/staff.json", file.READ)
@@ -33,19 +35,22 @@ func createGuard():
 	sprite.hframes = jsonString["hframes"]
 	moveDist = jsonString["moveRange"]
 	moveSpeed = jsonString["moveSpeed"]
+	ready = true
 
-func _physics_process(delta):
-	if current_dist < moveDist:
-		current_dist += moveSpeed * delta
-	elif current_dist >= moveDist and not stop:
-		timer.start()
-		stop = true	
+#func _physics_process(delta):
+#	if current_dist < moveDist:
+#		current_dist += moveSpeed * delta
+#	elif current_dist >= moveDist and not stop:
+#		timer.start()
+#		stop = true	
 	
-	if not stop:
-		move_and_slide(velocity * moveSpeed, Vector2.UP)
+#	if not stop:
+#		move_and_slide(velocity * moveSpeed, Vector2.UP)
 	
 func _on_timeout():
-	velocity.x *= -1
-	current_dist = 0
-	scale.x *= -1
-	stop = false
+	#velocity.x *= -1
+	#current_dist = 0
+	#scale.x *= -1
+	get_parent().scale.x *= -1
+	timer.start()
+	#stop = false
