@@ -11,6 +11,7 @@ var walljump = false
 var wall_right = false
 var wall_left = false
 var can_walk = true
+var crouching = false
 
 #TODO: 	add stammina for running 
 #		add idle animation
@@ -53,8 +54,8 @@ func get_Input():
 		velocity.y = jumpspeed
 		jumping = true
 
-	#if not Input.action_press("ui_left") and not Input.action_press("ui_right"):
-		#animationPlayer.play("idle")
+	if Input.is_key_pressed(KEY_S):
+		crouching = true
 
 func _physics_process(delta):
 	update()
@@ -71,7 +72,19 @@ func _physics_process(delta):
 	
 	if is_on_wall():
 		walljump = false
-		
+	
+	if crouching:
+		$icon.position.y = 22
+		$icon.rotation_degrees = 90
+		$CollisionShapeCrouching.disabled = false
+		$CollisionShapeNormal.disabled = true
+		crouching = false
+	elif not crouching:
+		$icon.rotation_degrees = 0
+		$icon.position.y = 0
+		$CollisionShapeCrouching.disabled = true
+		$CollisionShapeNormal.disabled = false
+			
 	velocity.y += gravity * delta
 	
 	velocity = move_and_slide(velocity, Vector2.UP)
