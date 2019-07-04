@@ -27,7 +27,10 @@ state_transition_duration = 2.0
 position = Vector2( 1147.39, 383.514 )
 
 [node name="Paul" parent="." instance=ExtResource( 4 )]
-position = Vector2( 2592.39, 222.514 )
+position = Vector2( 2593.39, 223.514 )
+
+[node name="Guenter" parent="." instance=ExtResource( 4 )]
+position = Vector2( 2688.39, 160.514 )
 
 [node name="Peter" parent="." instance=ExtResource( 4 )]
 position = Vector2( 2013.39, 383.514 )
@@ -37,5 +40,6 @@ position = Vector2( 170.39, 223.514 )
 
 [connection signal="detected" from="Steve" to="." method="_on_Guard_detected"]
 [connection signal="detected" from="Paul" to="." method="_on_Guard_detected"]
+[connection signal="detected" from="Guenter" to="." method="_on_Guard_detected"]
 [connection signal="detected" from="Peter" to="." method="_on_Guard_detected"]
 [connection signal="detected" from="Ron" to="." method="_on_Guard_detected"]

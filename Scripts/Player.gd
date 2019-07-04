@@ -13,7 +13,12 @@ var wall_left = false
 var can_walk = true
 var crouching = false
 
-#TODO: 	add stammina for running 
+var tilemap : TileMap
+
+func init(_tilemap : TileMap):
+	tilemap = _tilemap
+	print(_tilemap)
+	pass
 
 func get_Input():
 	velocity.x = 0
@@ -52,6 +57,12 @@ func get_Input():
 	if Input.is_key_pressed(KEY_S) and is_on_floor():
 		crouching = true
 
+func is_free_on_top():
+	var mapPos = tilemap.world_to_map(position)
+	mapPos.y -= 1
+	return tilemap.get_cellv(mapPos)
+	
+	pass
 func _physics_process(delta):
 	update()
 	if can_walk:
@@ -73,7 +84,8 @@ func _physics_process(delta):
 		$icon.rotation_degrees = 90
 		$CollisionShapeCrouching.disabled = false
 		$CollisionShapeNormal.disabled = true
-		crouching = false
+		if is_free_on_top() < 0:
+			crouching = false
 	elif not crouching:
 		$icon.rotation_degrees = 0
 		$icon.position.y = 0
@@ -103,8 +115,7 @@ func do_walljump(collider):
 				walljump = true
 				can_walk = false
 				wall_right = false
-				wall_left = true
-				
+				wall_left = true	
 			elif Input.is_key_pressed(KEY_D) and not wall_right:
 				velocity.y = jumpspeed
 				velocity.x = jumpspeed/2
