@@ -11,6 +11,9 @@ func _ready():
 	cam.set_anchor_mode(1)
 	cam.current = true
 	player.add_child(cam)
+	cam.smoothing_enabled = true
+	cam.zoom.x = 0.5
+	cam.zoom.y = 0.5
 
 func _on_Guard_detected():
 	player.position = Vector2(130, 385) 
