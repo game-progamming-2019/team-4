@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/Main.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/LightModifier.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/Levels/Level_0_Map.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Guard.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/CandleLight.tscn" type="PackedScene" id=5]
 
 [node name="TheEscape" type="Node2D"]
 script = ExtResource( 1 )
@@ -30,7 +31,7 @@ position = Vector2( 1147.39, 383.514 )
 position = Vector2( 2593.39, 223.514 )
 
 [node name="Guenter" parent="." instance=ExtResource( 4 )]
-position = Vector2( 2923.99, 62.6638 )
+position = Vector2( 2688.39, 160.514 )
 
 [node name="Peter" parent="." instance=ExtResource( 4 )]
 position = Vector2( 2013.39, 383.514 )
@@ -38,10 +39,8 @@ position = Vector2( 2013.39, 383.514 )
 [node name="Ron" parent="." instance=ExtResource( 4 )]
 position = Vector2( 170.39, 223.514 )
 
-[node name="Camera2D" type="Camera2D" parent="."]
-offset = Vector2( 5.86, 76.42 )
-offset_v = 1.0
-offset_h = 1.0
+[node name="CandleLight" parent="." instance=ExtResource( 5 )]
+position = Vector2( 48, 370.158 )
 
 [connection signal="detected" from="Steve" to="." method="_on_Guard_detected"]
 [connection signal="detected" from="Paul" to="." method="_on_Guard_detected"]
