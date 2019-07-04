@@ -21,13 +21,11 @@ func get_Input():
 	if Input.is_key_pressed(KEY_A):	
 		if Input.is_key_pressed(KEY_SHIFT):
 			velocity.x -= walkspeed * runMultiplier
-			
 			$icon.flip_h = true
 			$icon/AnimationPlayer.playback_speed = 4
 			$icon/AnimationPlayer.play("walk")
 		else:
 			velocity.x -= walkspeed
-			
 			$icon.flip_h = true
 			$icon/AnimationPlayer.playback_speed = 2
 			$icon/AnimationPlayer.play("walk")
@@ -35,13 +33,11 @@ func get_Input():
 	elif Input.is_key_pressed(KEY_D):
 		if Input.is_key_pressed(KEY_SHIFT):
 			velocity.x += walkspeed * runMultiplier
-			
 			$icon.flip_h = false
 			$icon/AnimationPlayer.playback_speed = 4
 			$icon/AnimationPlayer.play("walk")
 		else:
 			velocity.x += walkspeed
-			
 			$icon.flip_h = false
 			$icon/AnimationPlayer.playback_speed = 2
 			$icon/AnimationPlayer.play("walk")
@@ -53,7 +49,7 @@ func get_Input():
 		velocity.y = jumpspeed
 		jumping = true
 
-	if Input.is_key_pressed(KEY_S):
+	if Input.is_key_pressed(KEY_S) and is_on_floor():
 		crouching = true
 
 func _physics_process(delta):
