@@ -3,7 +3,7 @@ extends Node2D
 var player
 func _ready():
 	player = load("res://Scenes/Player.tscn").instance()
-	player.position = Vector2(130, 385)
+	player.position = $SpawnPoint.position
 	add_child(player)
 	player.init($Levels/Level_0/World_Map_1/Front_map)
 	var cam = Camera2D.new()

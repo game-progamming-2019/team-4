@@ -13,7 +13,7 @@ script = ExtResource( 1 )
 script = ExtResource( 2 )
 day_duration = 3.0
 day_start_hour = 18.0
-color_night = Color( 0.235294, 0.235294, 0.235294, 0.701961 )
+color_night = Color( 0.313726, 0.313726, 0.313726, 1 )
 state_transition_duration = 2.0
 
 [node name="HUD" type="CanvasLayer" parent="."]
@@ -41,6 +41,9 @@ position = Vector2( 170.39, 223.514 )
 
 [node name="CandleLight" parent="." instance=ExtResource( 5 )]
 position = Vector2( 48, 370.158 )
+
+[node name="SpawnPoint" type="Position2D" parent="."]
+position = Vector2( 95.949, 346.654 )
 
 [connection signal="detected" from="Steve" to="." method="_on_Guard_detected"]
 [connection signal="detected" from="Paul" to="." method="_on_Guard_detected"]
