@@ -56,6 +56,8 @@ func get_Input():
 
 	if Input.is_key_pressed(KEY_S) and is_on_floor():
 		crouching = true
+		$icon/AnimationPlayer.play("Crouch")
+		$icon/AnimationPlayer.playback_speed = 2
 
 func is_free_on_top():
 	var mapPos = tilemap.world_to_map(position)
@@ -80,8 +82,6 @@ func _physics_process(delta):
 		walljump = false
 	
 	if crouching:
-		$icon.position.y = 22
-		$icon.rotation_degrees = 90
 		$CollisionShapeCrouching.disabled = false
 		$CollisionShapeNormal.disabled = true
 		if is_free_on_top() < 0:
