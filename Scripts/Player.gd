@@ -23,48 +23,60 @@ func init(_tilemap : TileMap):
 func get_Input():
 	velocity.x = 0
 	
-	if Input.is_key_pressed(KEY_A):	
+	if Input.is_key_pressed(KEY_A) and not Input.is_key_pressed(KEY_S):	
 		if Input.is_key_pressed(KEY_SHIFT):
 			velocity.x -= walkspeed * runMultiplier
 			$icon.flip_h = true
-			$icon/AnimationPlayer.playback_speed = 4
-			$icon/AnimationPlayer.play("walk")
+			if is_free_on_top() < 0:
+				$icon/AnimationPlayer.playback_speed = 4
+				$icon/AnimationPlayer.play("walk")
 		else:
 			velocity.x -= walkspeed
 			$icon.flip_h = true
-			$icon/AnimationPlayer.playback_speed = 2
-			$icon/AnimationPlayer.play("walk")
+			if is_free_on_top() < 0:
+				$icon/AnimationPlayer.playback_speed = 2
+				$icon/AnimationPlayer.play("walk")
 		
-	elif Input.is_key_pressed(KEY_D):
+	elif Input.is_key_pressed(KEY_D) and not Input.is_key_pressed(KEY_S):
 		if Input.is_key_pressed(KEY_SHIFT):
 			velocity.x += walkspeed * runMultiplier
 			$icon.flip_h = false
-			$icon/AnimationPlayer.playback_speed = 4
-			$icon/AnimationPlayer.play("walk")
+			if is_free_on_top() < 0:
+				$icon/AnimationPlayer.playback_speed = 4
+				$icon/AnimationPlayer.play("walk")
 		else:
 			velocity.x += walkspeed
 			$icon.flip_h = false
-			$icon/AnimationPlayer.playback_speed = 2
-			$icon/AnimationPlayer.play("walk")
-		
-	else:
-		$icon/AnimationPlayer.play("idle")
-		
+			if is_free_on_top() < 0:
+				$icon/AnimationPlayer.playback_speed = 2
+				$icon/AnimationPlayer.play("walk")
+			
+	if Input.is_key_pressed(KEY_S) and is_on_floor():
+		if Input.is_key_pressed(KEY_D):
+			$icon.flip_h = false
+			velocity.x += walkspeed
+		elif Input.is_key_pressed(KEY_A):
+			$icon.flip_h = true
+			velocity.x -= walkspeed
+		crouching = true
+		$icon/AnimationPlayer.play("Crouch")
+		$icon/AnimationPlayer.playback_speed = 2 
+			
 	if Input.is_key_pressed(KEY_SPACE) and not jumping and is_on_floor():
 		velocity.y = jumpspeed
 		jumping = true
+		if is_free_on_top() < 0:
+			crouching = false
+			$icon/AnimationPlayer.play("idle")
 
-	if Input.is_key_pressed(KEY_S) and is_on_floor():
-		crouching = true
-		$icon/AnimationPlayer.play("Crouch")
-		$icon/AnimationPlayer.playback_speed = 2
-
+	if not Input.is_key_pressed(KEY_S) and not Input.is_key_pressed(KEY_A) and not Input.is_key_pressed(KEY_D) and is_free_on_top() < 0:
+		$icon/AnimationPlayer.play("idle")
+		
 func is_free_on_top():
 	var mapPos = tilemap.world_to_map(position)
 	mapPos.y -= 1
 	return tilemap.get_cellv(mapPos)
 	
-	pass
 func _physics_process(delta):
 	update()
 	if can_walk:
@@ -87,8 +99,6 @@ func _physics_process(delta):
 		if is_free_on_top() < 0:
 			crouching = false
 	elif not crouching:
-		$icon.rotation_degrees = 0
-		$icon.position.y = 0
 		$CollisionShapeCrouching.disabled = true
 		$CollisionShapeNormal.disabled = false
 			
