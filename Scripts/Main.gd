@@ -1,13 +1,23 @@
 extends Node2D
 
 var player
+var currentLevel : int = 1
+var levelsArr = [
+	"res://Scenes/Levels/Level_0_Map.tscn",
+	"res://Scenes/Levels/Level_1.tscn",
+	"res://Scenes/Levels/Level_2.tscn",
+	"res://Scenes/Levels/Level_3.tscn"
+	]
+
 func _ready():
+	print(levelsArr[currentLevel])
+	$Levels.add_child(load(levelsArr[currentLevel]).instance(), true)
+	get_node("Levels/Level_" + str(currentLevel)).connect("level_complete", self, "_on_level_complete")
 	player = load("res://Scenes/Player.tscn").instance()
 	player.position = $SpawnPoint.position
 	add_child(player)
-	player.init($Levels/Level_0/World_Map_1/Front_map)
+	player.init(get_node("Levels/Level_" + str(currentLevel) + "/Front_map"))
 	var cam = Camera2D.new()
-	#cam.offset = Vector2(150, 300)
 	cam.set_anchor_mode(1)
 	cam.current = true
 	player.add_child(cam)
@@ -16,5 +26,14 @@ func _ready():
 	cam.zoom.y = 0.5
 
 func _on_Guard_detected():
-	player.position = Vector2(130, 385) 
+	player.position = $SpawnPoint.position 
 	print("detected, game over")
+
+
+func _on_level_complete():
+	get_node("Levels/Level_" + str(currentLevel)).queue_free()
+	currentLevel = currentLevel + 1
+	$Levels.add_child(load(levelsArr[currentLevel]).instance(), true)
+	player.init(get_node("Levels/Level_" + str(currentLevel) + "/Front_map"))
+	player.position = $SpawnPoint.position
+		

@@ -62,12 +62,11 @@ func get_Input():
 		$icon/AnimationPlayer.play("Crouch")
 		$icon/AnimationPlayer.playback_speed = 2 
 			
-	if Input.is_key_pressed(KEY_SPACE) and not jumping and is_on_floor():
+	if Input.is_key_pressed(KEY_SPACE) and not jumping and is_on_floor() and is_free_on_top() < 0:
 		velocity.y = jumpspeed
 		jumping = true
-		if is_free_on_top() < 0:
-			crouching = false
-			$icon/AnimationPlayer.play("idle")
+		crouching = false
+		$icon/AnimationPlayer.play("idle")
 
 	if not Input.is_key_pressed(KEY_S) and not Input.is_key_pressed(KEY_A) and not Input.is_key_pressed(KEY_D) and is_free_on_top() < 0:
 		$icon/AnimationPlayer.play("idle")
