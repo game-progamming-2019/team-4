@@ -35,5 +35,6 @@ func _on_level_complete():
 	currentLevel = currentLevel + 1
 	$Levels.add_child(load(levelsArr[currentLevel]).instance(), true)
 	player.init(get_node("Levels/Level_" + str(currentLevel) + "/Front_map"))
+	get_node("Levels/Level_" + str(currentLevel)).connect("level_complete", self, "_on_level_complete")
 	player.position = $SpawnPoint.position
 		
