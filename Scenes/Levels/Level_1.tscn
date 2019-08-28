@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scenes/Levels/Level_1.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Back_map.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Front_map.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Guard.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 166.504, 10 )
@@ -21,5 +22,8 @@ tile_data = PoolIntArray( -262132, 24, 0, -262131, 24, 0, -262130, 24, 0, -26212
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( 1426.39, 308.735 )
 shape = SubResource( 1 )
+
+[node name="Guard" parent="." instance=ExtResource( 4 )]
+position = Vector2( 768.918, 128.205 )
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

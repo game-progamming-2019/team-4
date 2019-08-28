@@ -7,6 +7,16 @@ signal detected
 var target = null
 var hit_pos = []
 export var debug = true
+
+export var distance = 100
+export var duration = 5.0
+export var waiting_time = 2.0
+
+onready var tween = get_node("Tween")
+
+func _ready():
+	_start_movement()
+
 func _on_body_entered(body):
 
 	if(body.name == "Player"):
@@ -27,7 +37,7 @@ func _draw():
 func _physics_process(delta):
 	var space_state = get_world_2d().direct_space_state
 	if $Guard.ready:
-		$Guard.timer.start()
+		#$Guard.timer.start()
 		$Guard.ready = false
 			
 	if target:
@@ -44,3 +54,20 @@ func _physics_process(delta):
 				hit_pos.append(result.position)
 				if result.collider.name == "Player":
 					emit_signal("detected")
+
+func _start_movement():
+	
+	tween.interpolate_property(
+		self, "position", 
+		self.position, self.position + Vector2(distance,0), duration,
+		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT, waiting_time)
+	
+	tween.interpolate_property(
+		self, "position", 
+		self.position + Vector2(distance,0), self.position, duration,
+		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT, duration + 2 * waiting_time)
+		
+	tween.start()
+
+func _on_step(object, key):
+	scale.x = scale.x * (-1)

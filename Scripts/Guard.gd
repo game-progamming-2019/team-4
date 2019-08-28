@@ -21,10 +21,10 @@ func _ready():
 	file.open("./Assets/JsonConfigs/staff.json", file.READ)
 	json = parse_json(file.get_as_text())
 	file.close()
-	timer = Timer.new()
-	timer.wait_time = json["guard"][id]["waitDuration"]
-	timer.connect("timeout", self, "_on_timeout")
-	add_child(timer)
+	#timer = Timer.new()
+	#timer.wait_time = json["guard"][id]["waitDuration"]
+	#timer.connect("timeout", self, "_on_timeout")
+	#add_child(timer)
 	createGuard()
 
 func createGuard():

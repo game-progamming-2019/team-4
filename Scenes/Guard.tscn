@@ -5,10 +5,10 @@
 [ext_resource path="res://Scripts/Guard.gd" type="Script" id=3]
 [ext_resource path="res://icon.png" type="Texture" id=4]
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 30 )
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=2]
 resource_name = "walk"
 tracks/0/type = "value"
 tracks/0/path = NodePath("CollisionShape2D/Sprite:frame")
@@ -23,7 +23,8 @@ tracks/0/keys = {
 "values": [ 0, 2 ]
 }
 
-[node name="LightSource" type="Area2D"]
+[node name="Guard" type="Area2D"]
+scale = Vector2( -1, 1 )
 gravity_vec = Vector2( 0, 0 )
 script = ExtResource( 1 )
 
@@ -48,7 +49,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Guard"]
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 disabled = true
 __meta__ = {
 "_edit_group_": true
@@ -58,8 +59,14 @@ __meta__ = {
 texture = ExtResource( 4 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Guard"]
-anims/walk = SubResource( 3 )
+playback_process_mode = 2
+anims/walk = SubResource( 2 )
+
+[node name="Tween" type="Tween" parent="."]
+repeat = true
+playback/repeat = true
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
 [connection signal="detected" from="." to="Guard" method="_on_LightSource_detected"]
+[connection signal="tween_started" from="Tween" to="." method="_on_step"]
