@@ -41,7 +41,7 @@ func _ready():
 
 func _physics_process(delta):
 	day_cycle()
-	current_time += 1
+	#current_time += 1
 
 
 func day_cycle():
