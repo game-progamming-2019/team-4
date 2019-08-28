@@ -29,12 +29,16 @@ func _ready():
 
 func _on_level_complete():
 	get_node("Levels/Level_" + str(currentLevel)).queue_free()
-	currentLevel = currentLevel + 1
-	$Levels.add_child(load(levelsArr[currentLevel]).instance(), true)
-	player.init(get_node("Levels/Level_" + str(currentLevel) + "/Front_map"))
-	get_node("Levels/Level_" + str(currentLevel)).connect("level_complete", self, "_on_level_complete")
-	get_node("Levels/Level_" + str(currentLevel)).connect("player_detected", self, "_on_player_detected")
-	player.position = $SpawnPoint.position
+	
+	if currentLevel < levelsArr.size() - 1:
+		currentLevel = currentLevel + 1
+		$Levels.add_child(load(levelsArr[currentLevel]).instance(), true)
+		player.init(get_node("Levels/Level_" + str(currentLevel) + "/Front_map"))
+		get_node("Levels/Level_" + str(currentLevel)).connect("level_complete", self, "_on_level_complete")
+		get_node("Levels/Level_" + str(currentLevel)).connect("player_detected", self, "_on_player_detected")
+		player.position = $SpawnPoint.position
+	else:
+		get_tree().change_scene("res://Scenes/UI/EndMenu.tscn")
 
 func _on_player_detected():
 	if player.position != $SpawnPoint.position:
