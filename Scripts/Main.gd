@@ -1,7 +1,7 @@
 extends Node2D
 
 var player
-var currentLevel : int = 5
+var currentLevel : int = 1
 var levelsArr = [
 	"res://Scenes/Levels/Level_0_Map.tscn",
 	"res://Scenes/Levels/Level_1.tscn",
