@@ -23,7 +23,8 @@ tile_data = PoolIntArray( -262132, 24, 0, -262131, 24, 0, -262130, 24, 0, -26212
 position = Vector2( 1426.39, 308.735 )
 shape = SubResource( 1 )
 
-[node name="Guard" parent="." instance=ExtResource( 4 )]
+[node name="Guard_0" parent="." instance=ExtResource( 4 )]
 position = Vector2( 768.918, 128.205 )
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="detected" from="Guard_0" to="." method="_on_Player_detected"]

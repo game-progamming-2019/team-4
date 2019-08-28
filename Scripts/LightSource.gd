@@ -6,7 +6,6 @@ signal detected
 
 var target = null
 var hit_pos = []
-export var debug = true
 
 export var distance = 100
 export var duration = 5.0
@@ -25,14 +24,6 @@ func _on_body_entered(body):
 func _on_body_exited(body):
 	if(body.name == "Player"):
 		target = null
-
-func _draw():
-	if debug:
-		if target:
-			for hit in hit_pos:
-				var laser_color = Color(255, 0, 0)
-				draw_circle(hit - position, 5, laser_color)
-				draw_line(Vector2(), hit - position, laser_color)
 
 func _physics_process(delta):
 	var space_state = get_world_2d().direct_space_state

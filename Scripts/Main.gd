@@ -13,6 +13,7 @@ func _ready():
 	print(levelsArr[currentLevel])
 	$Levels.add_child(load(levelsArr[currentLevel]).instance(), true)
 	get_node("Levels/Level_" + str(currentLevel)).connect("level_complete", self, "_on_level_complete")
+	get_node("Levels/Level_" + str(currentLevel)).connect("player_detected", self, "_on_player_detected")
 	player = load("res://Scenes/Player.tscn").instance()
 	player.position = $SpawnPoint.position
 	add_child(player)
@@ -25,16 +26,16 @@ func _ready():
 	cam.zoom.x = 0.5
 	cam.zoom.y = 0.5
 
-func _on_Guard_detected():
-	player.position = $SpawnPoint.position 
-	print("detected, game over")
-
-
 func _on_level_complete():
 	get_node("Levels/Level_" + str(currentLevel)).queue_free()
 	currentLevel = currentLevel + 1
 	$Levels.add_child(load(levelsArr[currentLevel]).instance(), true)
 	player.init(get_node("Levels/Level_" + str(currentLevel) + "/Front_map"))
 	get_node("Levels/Level_" + str(currentLevel)).connect("level_complete", self, "_on_level_complete")
+	get_node("Levels/Level_" + str(currentLevel)).connect("player_detected", self, "_on_player_detected")
 	player.position = $SpawnPoint.position
-		
+
+func _on_player_detected():
+	player.position = $SpawnPoint.position 
+	print("detected, game over")
+	pass

@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scenes/Levels/Level_2.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Back_map.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Front_map.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Guard.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 166.971, 10 )
@@ -22,4 +23,12 @@ tile_data = PoolIntArray( -327641, 24, 0, -327640, 24, 0, -327639, 24, 0, -32763
 position = Vector2( 1904.23, 116.552 )
 shape = SubResource( 1 )
 
+[node name="Guard" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1500.72, 127.852 )
+
+[node name="Guard2" parent="." instance=ExtResource( 4 )]
+position = Vector2( 759.011, 127.852 )
+
 [connection signal="body_entered" from="Front_map/Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="detected" from="Guard" to="." method="_on_Player_detected"]
+[connection signal="detected" from="Guard2" to="." method="_on_Player_detected"]

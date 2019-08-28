@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scripts/Main.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/LightModifier.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/Guard.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Scenes/CandleLight.tscn" type="PackedScene" id=4]
 
 [node name="TheEscape" type="Node2D"]
 script = ExtResource( 1 )
@@ -19,35 +18,11 @@ state_transition_duration = 2.0
 
 [node name="Levels" type="Node2D" parent="."]
 
-[node name="Steve" parent="." instance=ExtResource( 3 )]
-visible = false
-position = Vector2( 112.439, -82.8865 )
-
-[node name="Paul" parent="." instance=ExtResource( 3 )]
-visible = false
-position = Vector2( 2593.39, 223.514 )
-
-[node name="Guenter" parent="." instance=ExtResource( 3 )]
-visible = false
-position = Vector2( 2688.39, 160.514 )
-
-[node name="Peter" parent="." instance=ExtResource( 3 )]
-visible = false
-position = Vector2( 2013.39, 383.514 )
-
 [node name="Ron" parent="." instance=ExtResource( 3 )]
 visible = false
-position = Vector2( 121.39, 272.514 )
-
-[node name="CandleLight" parent="." instance=ExtResource( 4 )]
-visible = false
-position = Vector2( -123.856, -21.4255 )
+position = Vector2( 34.9153, -335.599 )
 
 [node name="SpawnPoint" type="Position2D" parent="."]
 position = Vector2( 159.642, 96.7377 )
 
-[connection signal="detected" from="Steve" to="." method="_on_Guard_detected"]
-[connection signal="detected" from="Paul" to="." method="_on_Guard_detected"]
-[connection signal="detected" from="Guenter" to="." method="_on_Guard_detected"]
-[connection signal="detected" from="Peter" to="." method="_on_Guard_detected"]
 [connection signal="detected" from="Ron" to="." method="_on_Guard_detected"]
