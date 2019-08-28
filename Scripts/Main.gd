@@ -8,6 +8,11 @@ var levelsArr = [
 	"res://Scenes/Levels/Level_2.tscn",
 	"res://Scenes/Levels/Level_3.tscn"
 	]
+var gameOvers = [
+
+]
+
+var outline = "res://Assets/Sprites/Outline.png"
 
 func _ready():
 	print(levelsArr[currentLevel])
@@ -36,6 +41,12 @@ func _on_level_complete():
 	player.position = $SpawnPoint.position
 
 func _on_player_detected():
-	player.position = $SpawnPoint.position 
-	print("detected, game over")
+	if player.position != $SpawnPoint.position:
+		var detected : Sprite = Sprite.new()
+		detected.texture = load(outline)
+		detected.position = player.position
+		get_node("Levels/Level_" + str(currentLevel) + "/PlayerResets").add_child(detected)
+		gameOvers.append(detected)
+		player.position = $SpawnPoint.position 
+		print("detected, game over")
 	pass
