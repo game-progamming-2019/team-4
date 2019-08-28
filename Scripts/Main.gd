@@ -1,12 +1,14 @@
 extends Node2D
 
 var player
-var currentLevel : int = 1
+var currentLevel : int = 5
 var levelsArr = [
 	"res://Scenes/Levels/Level_0_Map.tscn",
 	"res://Scenes/Levels/Level_1.tscn",
 	"res://Scenes/Levels/Level_2.tscn",
-	"res://Scenes/Levels/Level_3.tscn"
+	"res://Scenes/Levels/Level_3.tscn",
+	"res://Scenes/Levels/Level_4.tscn",
+	"res://Scenes/Levels/Level_5.tscn"
 	]
 var outline = "res://Assets/Sprites/Outline.png"
 

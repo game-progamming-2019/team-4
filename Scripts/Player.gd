@@ -103,6 +103,7 @@ func _physics_process(delta):
 			
 	velocity.y += gravity * delta
 	
+	#move_and_slide(velocity, Vector2.UP)
 	velocity = move_and_slide(velocity, Vector2.UP)
 	
 	if get_slide_count() > 0:
